@@ -1,26 +1,6 @@
 # jfiglet
 
-Java implementation of FIGfonts to create ascii art banners. My goals were:
-
-- distributed as a maven dependency
-- should be small
-
-I started out from Benoît Rigaut, Juillet work found at [www.rigaut.com](http://www.rigaut.com/benoit/CERN/FigletJava/)
-
-## Figlet
-
-[figlet](http://www.figlet.org/) is a command-line tool which helps you to create ascii banners like this:
-
-```
-      _ _____ ___ ____ _     _____ _____
-     | |  ___|_ _/ ___| |   | ____|_   _|
-  _  | | |_   | | |  _| |   |  _|   | |
- | |_| |  _|  | | |_| | |___| |___  | |
-  \___/|_|   |___\____|_____|_____| |_|
-
-```
-
-Figlet has a *specification* which is included into the repo for easy access [here](https://github.com/lalyos/jfiglet/blob/master/figfont.txt)
+Java implementation of FIGfonts to create ascii art banners.
 
 ## Usage
 you can use it from command line or from java code
@@ -31,7 +11,7 @@ add the following maven dependency to your `pom.xml`
 
 ```
 <dependency>
-	<groupId>com.github.lalyos</groupId>
+	<groupId>com.github.enxt</groupId>
 	<artifactId>jfiglet</artifactId>
 	<version>0.0.8</version>
 </dependency>
@@ -42,7 +22,7 @@ add the following maven dependency to your `pom.xml`
 Then one could use number of `convertOneLine(...)` static methods to do the magic
 
 ```
-import com.github.lalyos.jfiglet.FigletFont;
+import com.github.enxt.jfiglet.FigletFont;
 import java.io.File;
 
 public class App {
@@ -87,30 +67,3 @@ Figlet font:
       if FLF starts from `classpath:' then it will be looked for in JRE classpath,
       otherwise FLF if path to file in file system
 ```
-
-### from source
-
-```
-git clone git@github.com:lalyos/jfiglet.git
-cd jfiglet
-mvn exec:java -Dexec.arguments="jfiglet rulez"
-```
-### from maven central
-
-```
-curl -o jfiglet.jar http://central.maven.org/maven2/com/github/lalyos/jfiglet/0.0.8/jfiglet-0.0.8.jar
-java -jar jfiglet.jar "text to convert"
-```
-
-## Related projects
-
-First I wrapped http://artii.herokuapp.com/ which is based on the artii gem
-I found 2 java implementations:
-- http://www.jave.de/eclipse/figlet/index.html its not just FIGlet its  much more, includes swing editor and so ...
-- http://www.rigaut.com/benoit/CERN/FigletJava/ it contains a single class implementation, so i choose this one.
-
-
-## Todo
-
-- vertical *smush*-ing
-- add more fonts: first i wanted to keep it small, but want to deliver a couple of fonts included in the jar, or maybe as a separate maven dependency

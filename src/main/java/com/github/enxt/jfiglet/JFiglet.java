@@ -1,4 +1,4 @@
-package com.github.lalyos.jfiglet;
+package com.github.enxt.jfiglet;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import static com.github.lalyos.jfiglet.FigletFont.convertOneLine;
+import static com.github.enxt.jfiglet.FigletFont.convertOneLine;
 
 public class JFiglet {
 

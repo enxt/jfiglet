@@ -1,4 +1,4 @@
-package com.github.lalyos.jfiglet;
+package com.github.enxt.jfiglet;
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -6,14 +6,14 @@ import java.io.*;
 /**
  * FigletFont implementation. A single static method call will create the ascii
  * art in a mulitilne String. FigletFont format is specified at:
- * https://github.com/lalyos/jfiglet/blob/master/figfont.txt
+ * https://github.com/enxt/jfiglet/blob/master/figfont.txt
  *
  * <pre>
  * <code>String asciiArt = FigletFont.convertOneLine("hello");</code>
  * </pre>
  *
  * Originally found at: http://www.rigaut.com/benoit/CERN/FigletJava/. Moved to
- * <a href="http://lalyos.github.io/jfiglet/">github.com</a>.
+ * <a href="http://enxt.github.io/jfiglet/">github.com</a>.
  *
  * @author Benoit Rigaut CERN July 96
  * www.rigaut.com benoit@rigaut.com
@@ -74,7 +74,7 @@ public class FigletFont {
   }
 
     /**
-     * Creates a FigletFont as specified at: https://github.com/lalyos/jfiglet/blob/master/figfont.txt
+     * Creates a FigletFont as specified at: https://github.com/enxt/jfiglet/blob/master/figfont.txt
      *
      * @param stream
      * @throws java.io.IOException
@@ -196,7 +196,7 @@ public class FigletFont {
   }
 
   public static String convertOneLine(String message) throws IOException {
-    return convertOneLine(FigletFont.class.getClassLoader().getResourceAsStream("standard.flf"), message);
+    return convertOneLine(FigletFont.class.getClassLoader().getResourceAsStream("big.flf"), message);
   }
 
   public static String convertOneLine(File fontFile, String message) throws IOException {

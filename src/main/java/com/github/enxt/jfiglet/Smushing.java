@@ -1,4 +1,4 @@
-package com.github.lalyos.jfiglet;
+package com.github.enxt.jfiglet;
 
 import java.util.*;
 
