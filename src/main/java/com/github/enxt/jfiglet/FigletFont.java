@@ -181,29 +181,41 @@ public class FigletFont {
   }
 
 
-  public String convert(String message) {
+  public String convert(String message, boolean underline) {
     char[][] convertedMessage = Smushing.convert(this, message);
     StringBuilder result = new StringBuilder();
     for(int l = 0; l < this.height; l++){
+      if(underline && l == 6) {
+        boolean inletter = false;
+        for(int ch = 0; ch < convertedMessage[l].length; ch++) {
+          if((convertedMessage[l][ch] == '\b' || convertedMessage[l][ch] == ' ' || convertedMessage[l][ch] == '$') && !inletter) {
+            convertedMessage[l][ch] = '=';
+          } else if (inletter && (convertedMessage[l][ch] != '\b' && convertedMessage[l][ch] != ' ' && convertedMessage[l][ch] != '$')){
+            inletter = false;
+          } else {
+            inletter = true;
+          }
+        }
+      }
       result.append(convertedMessage[l]);
       result.append('\n');
     }
     return result.toString().replace(hardblank, ' ');
   }
 
-  public static String convertOneLine(InputStream fontFileStream, String message) throws IOException {
-    return new FigletFont(fontFileStream).convert(message);
+  public static String convertOneLine(InputStream fontFileStream, String message, Boolean underline) throws IOException {
+    return new FigletFont(fontFileStream).convert(message, underline);
   }
 
-  public static String convertOneLine(String message) throws IOException {
-    return convertOneLine(FigletFont.class.getClassLoader().getResourceAsStream("big.flf"), message);
+  public static String convertOneLine(String message, Boolean underline) throws IOException {
+    return convertOneLine(FigletFont.class.getClassLoader().getResourceAsStream("big.flf"), message, underline);
   }
 
-  public static String convertOneLine(File fontFile, String message) throws IOException {
-    return convertOneLine(new FileInputStream(fontFile), message);
+  public static String convertOneLine(File fontFile, String message, Boolean underline) throws IOException {
+    return convertOneLine(new FileInputStream(fontFile), message, underline);
   }
 
-  public static String convertOneLine(String fontPath, String message) throws IOException {
+  public static String convertOneLine(String fontPath, String message, Boolean underline) throws IOException {
     InputStream fontStream = null;
     if (fontPath.startsWith("classpath:")) {
       fontStream = FigletFont.class.getResourceAsStream(fontPath.substring(10));
@@ -212,7 +224,7 @@ public class FigletFont {
     } else {
       fontStream = new FileInputStream(fontPath);
     }
-    return convertOneLine(fontStream, message);
+    return convertOneLine(fontStream, message, underline);
   }
 
   FigletFont withSmushingRulesToApply(SmushingRulesToApply smushingRulesToApply){

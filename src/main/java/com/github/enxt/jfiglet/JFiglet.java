@@ -16,6 +16,7 @@ public class JFiglet {
         final Iterator<String> arguments = Arrays.asList(args).iterator();
         String font = null;
         String text = null;
+        Boolean underline = false;
         PrintStream out = System.out;
 
         while (arguments.hasNext()) {
@@ -24,6 +25,8 @@ public class JFiglet {
                 font = requireNextArgument(arguments, arg);
             } else if ("-o".equals(arg)) {
                 out = new PrintStream(new FileOutputStream(requireNextArgument(arguments, arg)));
+            } else if("-u".equals(arg)) {
+                underline = true;
             } else {
                 if (!arguments.hasNext()) {
                     text = arg;
@@ -34,9 +37,9 @@ public class JFiglet {
         if (text == null) {
             System.err.println(usage());
         } else if (font == null) {
-            out.println(convertOneLine(text));
+            out.println(convertOneLine(text, underline));
         } else {
-            out.println(convertOneLine(font, text));
+            out.println(convertOneLine(font, text, underline));
         }
         out.close();
     }
@@ -51,9 +54,9 @@ public class JFiglet {
     private static String usage() {
         final StringWriter result = new StringWriter();
         final PrintWriter pw = new PrintWriter(result);
-        pw.println("Usage: java -jar jfiglet.jar [-f FLF] [-o OUTFILE] MESSAGE");
-        pw.println("Prints MESSAGE to OUTFILE (default stdout) as ASCII art using Figlet font");
-        pw.println("Example: java -jar jfiglet.jar -f \"/opt/myfont.flf\" \"Hello World\"");
+        pw.println("Usage: java -jar jfiglet.jar [-f FLF] [-o OUTFILE] [-u] MESSAGE");
+        pw.println("Prints MESSAGE to OUTFILE (default stdout) as ASCII art using Figlet font, -u for underline");
+        pw.println("Example: java -jar jfiglet.jar -f \"/opt/myfont.flf\" -u \"Hello World\"");
         pw.println("\n");
         pw.println("Figlet font:");
         pw.println("  -f  FLF is font file location within file system, java classpath or www.");
